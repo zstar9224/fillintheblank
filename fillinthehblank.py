@@ -42,10 +42,22 @@ def VerseWithBlanks(verse):
 if __name__ == "__main__":
     df = pd.read_csv('Navigator_Bible60.csv', encoding='utf-8')
 
-    input(f'\n성경암송 문제를 시작합니다. 엔터를 눌러추세요....')
-    print('\n')
+    while True:
+        section = input(f'\n성경암송 문제를 시작합니다. 문제 섹션을 입력해주세요: a/b/c/d/e/[all]....')
+        print('\n')
 
-    for idx, row in df.iterrows():
+        if (section  == '') or (section == 'all'):
+            section_df = df
+            break
+        elif len(section) == 1:
+            section = section.upper()
+            if section in ['A', 'B', 'C', 'D', 'E']:
+                section_df = df[df['제목'].str[0] == section]
+                break
+
+        print(f'잘못 입력하셨습니다.')
+
+    for idx, row in section_df.iterrows():
         verse = row['성경구절']
         verse_with_blanks, answer_in_blanks = VerseWithBlanks(verse)
         print(f'\n{idx}: {verse_with_blanks}')
