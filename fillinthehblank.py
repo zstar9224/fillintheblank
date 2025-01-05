@@ -10,6 +10,9 @@ def VerseWithBlanks(verse):
     answer_in_blanks  = []
     kk = 0
 
+    # 초기 On/Off
+    on_off = OnOff()
+
     # [  ] 패턴 찾기
     p = re.compile(r'\[(.*?)\]')
     for m in p.finditer(verse):
@@ -20,13 +23,14 @@ def VerseWithBlanks(verse):
         # On/Off 확률을 적용
         #   1: 괄호를 적용하지 않는다.
         #   0: 괄호를 적용한다.
-        if OnOff() == 1:
+        if on_off == 1:
             verse_with_blanks.append(m.group()[1:-1])
         else:
             num_characters = m.end() - m.start() - 2
             verse_with_blanks.append('[' + '_' * (num_characters + 5)  + ']')
             answer_in_blanks.append(m.group())
 
+        on_off ^= 1
         kk = m.end()
 
     # 마지막에 괄호 밖의 단어들이 남아있다면 추가한다.
