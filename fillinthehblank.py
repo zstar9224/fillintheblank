@@ -23,7 +23,8 @@ def VerseWithBlanks(verse):
         if OnOff() == 1:
             verse_with_blanks.append(m.group()[1:-1])
         else:
-            verse_with_blanks.append('[       ]')
+            num_characters = m.end() - m.start() - 2
+            verse_with_blanks.append('[' + '_' * (num_characters + 5)  + ']')
             answer_in_blanks.append(m.group())
 
         kk = m.end()
