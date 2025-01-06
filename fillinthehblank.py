@@ -58,8 +58,11 @@ if __name__ == "__main__":
         print(f'잘못 입력하셨습니다.')
 
     for idx, row in section_df.iterrows():
+        section_name = row['제목']
+        subsection_name = row['소제목']
+        chapter_verse_name = row['장절']
         verse = row['성경구절']
         verse_with_blanks, answer_in_blanks = VerseWithBlanks(verse)
-        print(f'\n{idx}: {verse_with_blanks}')
+        print(f'\n♠ {idx+1}: [{section_name}] [{subsection_name}] [{chapter_verse_name}]: {verse_with_blanks}')
         input()
-        print(f'\t\t 정답:  {",  ".join(answer_in_blanks)}')
+        print(f'\t\t ◎ 정답:  {",  ".join(answer_in_blanks)}')
